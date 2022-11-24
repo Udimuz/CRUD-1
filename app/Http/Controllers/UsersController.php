@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+//use App\Models\User;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
@@ -12,9 +14,13 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        dd(1234);
+		//dd(1234);
+		$users = User::get();
+		//dd($users);
+		// вызов Шаблона:  "resources/views/index.blade.php"
+		return view('index', compact('users'));
     }
 
     /**
@@ -22,9 +28,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+		return view('form');
     }
 
     /**
@@ -44,9 +50,9 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
-        //
+		return view('show');
     }
 
     /**
@@ -55,9 +61,9 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        //
+		return view('form', compact('user'));
     }
 
     /**
