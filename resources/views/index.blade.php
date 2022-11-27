@@ -9,15 +9,18 @@
         <thead>
         <tr>
             <th scope="col">№</th>
+            <th scope="col">ID</th>
             <th scope="col">Имя</th>
             <th scope="col">E-mail</th>
             <th scope="col">Действия</th>
         </tr>
         </thead>
         <tbody>
+        @php $count=0 @endphp
         @foreach($users as $user)
             <tr>
-                <th scope="row">{{ $user->id }}</th>
+                <td>{{ ++$count }}</td>
+                <td>{{ $user->id }}</td>
                 <td><a href="{{ route('users.show', $user) }}">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
                 <td>

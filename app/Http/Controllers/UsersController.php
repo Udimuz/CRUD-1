@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use App\Models\User;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -40,7 +41,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
 	 */
 	//Добавление нового пользователя - Получения данных:
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(UserRequest $request): \Illuminate\Http\RedirectResponse
     {
 		// Вставляем данные в базу:
 		User::create($request->only(['name', 'email']));
@@ -78,7 +79,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
 	 */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         //dd($request->all());
 		$user->update($request->only(['name', 'email']));
