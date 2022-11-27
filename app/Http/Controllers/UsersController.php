@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 //use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UsersController extends Controller
@@ -18,7 +17,7 @@ class UsersController extends Controller
     public function index(): View
     {
 		//dd(1234);
-		$users = User::get();
+		$users = User::paginate();	//	paginate(20)
 		//dd($users);
 		// вызов Шаблона:  "resources/views/index.blade.php"
 		return view('index', compact('users'));
@@ -47,7 +46,8 @@ class UsersController extends Controller
 		User::create($request->only(['name', 'email']));
         //dd($request->all());
 		// И вернуть всё это редиректом на:		Вернуться на страницу списка
-		return redirect()->route('users.index');
+		//return redirect()->route('users.index');
+		return redirect()->route('users.index')->withSuccess('Created user: '.$request->name);;
     }
 
     /**
@@ -84,7 +84,8 @@ class UsersController extends Controller
         //dd($request->all());
 		$user->update($request->only(['name', 'email']));
 		// И после этого нужно возвращаться на страницу index
-		return redirect()->route('users.index');
+		//return redirect()->route('users.index');
+		return redirect()->route('users.index')->withSuccess('Обновлён пользователь '.$user->name);;
     }
 
     /**
@@ -98,6 +99,7 @@ class UsersController extends Controller
     {
 		$user->delete();
 		// И после этого возвращаемся на другую страницу:	index
-		return redirect()->route('users.index');
+		//return redirect()->route('users.index');
+		return redirect()->route('users.index')->withDanger('Удалён пользователь '.$user->name);
     }
 }
