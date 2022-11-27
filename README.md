@@ -9,7 +9,7 @@
 
 cd /var/www/
 
-git clone ... folder
+git clone https://github.com/Udimuz/CRUD-1.git folder
 
 cd folder
 
