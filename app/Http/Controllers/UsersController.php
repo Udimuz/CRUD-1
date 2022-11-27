@@ -37,11 +37,16 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+     * @return \Illuminate\Http\RedirectResponse
+	 */
+	//Добавление нового пользователя - Получения данных:
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        //
+		// Вставляем данные в базу:
+		User::create($request->only(['name', 'email']));
+        //dd($request->all());
+		// И вернуть всё это редиректом на:		Вернуться на страницу списка
+		return redirect()->route('users.index');
     }
 
     /**
@@ -71,11 +76,14 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\RedirectResponse
+	 */
     public function update(Request $request, User $user)
     {
-        //
+        //dd($request->all());
+		$user->update($request->only(['name', 'email']));
+		// И после этого нужно возвращаться на страницу index
+		return redirect()->route('users.index');
     }
 
     /**
