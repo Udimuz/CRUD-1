@@ -57,7 +57,7 @@ class UsersController extends Controller
      */
     public function show(User $user): View
     {
-		return view('show');
+		return view('show', compact('user'));
     }
 
     /**
@@ -90,10 +90,13 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\RedirectResponse
+	 */
+	// Удаление пользователя:
     public function destroy(User $user)
     {
-        //
+		$user->delete();
+		// И после этого возвращаемся на другую страницу:	index
+		return redirect()->route('users.index');
     }
 }
